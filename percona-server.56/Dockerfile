@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Percona Development <info@percona.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
                 apt-transport-https ca-certificates \
                 pwgen \
         && rm -rf /var/lib/apt/lists/*
@@ -23,10 +23,10 @@ RUN { \
                 echo percona-server-server-$PERCONA_MAJOR percona-server-server/root_password password 'unused'; \
                 echo percona-server-server-$PERCONA_MAJOR percona-server-server/root_password_again password 'unused'; \
         } | debconf-set-selections \
-        && apt-get update \
-        && apt-get install -y --force-yes \
+        && apt-get -qq update \
+        && apt-get install -qqy --force-yes \
                 percona-server-server-$PERCONA_MAJOR=$PERCONA_VERSION \
-        && apt-get install -y --force-yes \
+        && apt-get install -qqy --force-yes \
                 percona-server-tokudb-$PERCONA_MAJOR=$PERCONA_VERSION \
         && rm -rf /var/lib/apt/lists/* \
 # comment out any "user" entires in the MySQL config ("docker-entrypoint.sh" or "--user" will handle user switching)
