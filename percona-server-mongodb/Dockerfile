@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Percona Development Team <opensource-dev@percona.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -qqy --no-install-recommends \
                 apt-transport-https ca-certificates \
                 pwgen \
         && rm -rf /var/lib/apt/lists/*
@@ -19,8 +19,8 @@ ENV PERCONA_VERSION 3.0.14-1.9.jessie
 
 
 RUN \
-        apt-get update \
-        && apt-get install -y --force-yes \
+        apt-get update -qq \
+        && apt-get install -qqy --force-yes \
           percona-server-mongodb=$PERCONA_VERSION \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /data/db && mkdir -p /data/db \ 
