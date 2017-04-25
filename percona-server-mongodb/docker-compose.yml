@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  percona:
+    image: percona/percona-server-mongodb:latest
+    name: perconaservermongodb
+    ports:
+      - "27017"
+    volumes:
+      # create volumes for use
+      - /data/db
