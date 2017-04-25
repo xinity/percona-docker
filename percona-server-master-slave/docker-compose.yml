@@ -2,7 +2,7 @@ version: '2'
 
 services:
   percona:
-    image: percona/percona-server:latest
+    image: percona/percona-server:5.7
     name: perconaserver
     environment:
       MYSQL_ROOT_PASSWORD: secret
