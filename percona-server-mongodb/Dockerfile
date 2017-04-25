@@ -1,7 +1,12 @@
 FROM debian:jessie
 MAINTAINER Percona Development Team <opensource-dev@percona.com>
 
-RUN apt-get update && apt-get install -qqy --no-install-recommends \
+RUN echo "APT::Install-Recommends              false;" >> /etc/apt/apt.conf.d/recommends.conf \
+    && echo "APT::Install-Suggests                false;" >> /etc/apt/apt.conf.d/recommends.conf \
+    && echo "APT::AutoRemove::RecommendsImportant false;" >> /etc/apt/apt.conf.d/recommends.conf \
+    && echo "APT::AutoRemove::SuggestsImportant   false;" >> /etc/apt/apt.conf.d/recommends.conf
+
+RUN apt-get update && apt-get install -qqy \
                 apt-transport-https ca-certificates \
                 pwgen \
         && rm -rf /var/lib/apt/lists/*
